@@ -1,5 +1,7 @@
 # 血缘图
 
+根据 [此issue](https://github.com/aliyun/react-lineage-dag/issues/43) 修改代码，修复了部分表之前出现的重叠现象
+
 > 用于表示表与表之间，表和其他关联实体之间关系的图
 
 ![demo preview](https://img.alicdn.com/imgextra/i4/O1CN01ou8wTq20SQv4AnedD_!!6000000006848-1-tps-1337-761.gif)
@@ -163,6 +165,7 @@ const App = () => {
 
 ```shell
 # clone 本项目后
+$ nvm use v16.16.0
 $ npm install
 $ cd example
 $ npm install

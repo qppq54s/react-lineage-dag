@@ -75,7 +75,7 @@ export default class LineageCanvas extends Canvas {
         continue;
       }
       let field = _.find(node.fieldsList, (_item) => {
-        return _item.id === item.fieldId; 
+        return _item.id === item.fieldId;
       });
       resultFields.push(field.dom);
       let edges = this.getNeighborEdges(node.id);
@@ -92,7 +92,7 @@ export default class LineageCanvas extends Canvas {
       }
 
       resultEdges = resultEdges.concat(sourceEdges).concat(targetEdges);
-      
+
       sourceEdges.forEach((_item) => {
         queue.push({
           nodeId: _item.options.targetNode,
@@ -119,7 +119,7 @@ export default class LineageCanvas extends Canvas {
     const rank = {};
     let rankKeys = [];
     const after = {};
-  
+
     for (let node of nodes) {
       if (!rank[node.left]) {
         rank[node.left] = [];
@@ -130,20 +130,20 @@ export default class LineageCanvas extends Canvas {
     }
 
     rankKeys = Object.keys(rank).sort((a, b) => parseInt(a) - parseInt(b));
-  
+
     // 保证统一层级上的节点，排序是不变的，利用order进行从大到小排序
     rankKeys.forEach(level => {
       let rnodes = rank[level];
       const xys = rnodes.sort((a, b) => a.top - b.top).map(n => [n.left, n.top]);
-  
+
       rnodes = rnodes.sort((a, b) => a.order - b.order)
-  
+
       rank[level].forEach((node, ind) => {
         node.left = xys[ind][0];
         node.top = xys[ind][1];
       });
     });
-    
+
     let maxRank = {};
     // 同一个x轴上的节点
     rankKeys.forEach(level => {
@@ -158,26 +158,28 @@ export default class LineageCanvas extends Canvas {
       if (rnodes.length === 1) {
         return;
       }
-  
+
       // 从小到大排序，调整上下位置
       rnodes = rnodes.sort((a, b) => a.top - b.top);
-  
+
       for (let i = 0; i < rnodes.length - 1; i++) {
-        
+
         const current = rnodes[i];
         const next = rnodes[i + 1];
-  
+
         if ((current.top + current.height) >= next.top) {
           next.top = (current.top + current.height) + nodestep;
         }
-  
+
         if((current.top + current.height + nodestep) < next.top) {
           next.top = current.top + current.height + nodestep;
         }
+
+        next.top = current.top + current.height + nodestep;
       }
     });
 
-    // 调整左右位置  
+    // 调整左右位置
     for(let i = 0; i < rankKeys.length - 1; i++) {
       let currentKey = rankKeys[i];
       let nextKey = rankKeys[i + 1];
@@ -190,7 +192,7 @@ export default class LineageCanvas extends Canvas {
         maxRank[nextKey] += _tmpGap;
       }
     }
-  
+
     rankKeys.forEach(level => {
       const ns = rank[level];
       ns.forEach(n => {

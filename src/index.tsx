@@ -98,7 +98,7 @@ export default class LineageDag extends React.Component<ComProps, any> {
       theme: {
         edge: {
           type: 'endpoint',
-          // shapeType: 'AdvancedBezier', 
+          // shapeType: 'AdvancedBezier',
           arrow: true,
           isExpandWidth: true,
           arrowPosition: 1,
@@ -139,7 +139,7 @@ export default class LineageDag extends React.Component<ComProps, any> {
       nodes: result.nodes,
       edges: result.edges
     };
-    
+
     setTimeout(() => {
       let tmpEdges = result.edges;
       result.edges = [];
@@ -156,7 +156,7 @@ export default class LineageDag extends React.Component<ComProps, any> {
         // this.canvas.wrapper.style.visibility = 'visible';
         this.canvas.addEdges(tmpEdges, true);
 
-        let minimap = _.get(this, 'props.config.minimap', {});
+        let minimap:any = _.get(this, 'props.config.minimap', {});
 
         const minimapCfg = _.assign({}, minimap.config, {
           events: [
@@ -267,7 +267,7 @@ export default class LineageDag extends React.Component<ComProps, any> {
           }
         });
       });
-    } 
+    }
 
     this.canvasData = result;
 
@@ -287,7 +287,7 @@ export default class LineageDag extends React.Component<ComProps, any> {
       <div
         className={this._genClassName()}
       >
-        <ActionMenu 
+        <ActionMenu
           canvas={canvas}
           actionMenu={actionMenu}
           visible={actionMenuVisible}
